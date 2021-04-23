@@ -12,7 +12,5 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm BestBuy Shop Bot')
-    #print(bot.get_matched_and_available('GeForce RTX 3060'))
-    # bot.perform_purchase('https://www.bestbuy.com/site/pny-geforce-gt1030-2gb-pci-e-3-0-graphics-card-black/5901353.p?skuId=5901353')
-
+    # Run main bot command. You can modify this string value to what you want
     bot.main('GeForce RTX 30')

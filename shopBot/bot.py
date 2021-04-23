@@ -59,6 +59,7 @@ def get_matched_and_available(target_name):
         price = price.strip('$')
         price = float(price.replace(',', '')) # Convert to float
 
+        # Here we specify target prices for certain products. These are arbitrarily set and you can modify based on your budget constraints.
         target_price = 0
         if '3060' in product_name:
             target_price = 500
@@ -105,8 +106,12 @@ def perform_purchase(url):
     Given url of product, add to cart then checkout
     """
     driver = webdriver.Firefox(executable_path='C:\\Users\\GBC-Mandarin\\Documents\\GitHub\\BestBuy-ShopBot\\shopBot\\venv\\Lib\\site-packages\\selenium\\webdriver\\firefox\\geckodriver.exe')
-    # url = "https://www.supremenewyork.com/shop/shirts/p4skltm3i" #a redirect to a login page occurs
+    # This driver needs to be pointed to your own path. You will also need to have the correct driver for the browser you want to use
+    # Here we used Firefox driver which can be downloaded from Selenemium website
     driver.get(url)
+
+    # These waits may or may not be necessary based on the speed of your computer and internet connection.
+    # I included them because I needed them still
     try:
         WebDriverWait(driver, 1).until(
             EC.presence_of_element_located((By.XPATH, '//button[text()="Add to Cart"]')))
@@ -167,6 +172,7 @@ def perform_purchase(url):
     for ch in value:
         element.send_keys(ch)
 
+    # Need to scroll to get to last few fields
     driver.execute_script("window.scrollTo(0, 300)")
     driver.find_element_by_id('user.emailAddress').send_keys(config.get('EMAIL'))
     driver.find_element_by_id('user.phone').send_keys(config.get('PHONE'))
@@ -183,6 +189,7 @@ def perform_purchase(url):
         return False
 
     driver.find_element_by_id('optimized-cc-card-number').send_keys(config.get('CREDIT_CARD'))
+    # Slight wait because remaining fields don't show up until credit card number is input into the field
     time.sleep(1)
     try:
         WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, 'expiration-month')))
