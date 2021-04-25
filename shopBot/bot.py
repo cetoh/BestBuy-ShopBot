@@ -59,14 +59,15 @@ def get_matched_and_available(target_name):
         price = price.strip('$')
         price = float(price.replace(',', '')) # Convert to float
 
-        # Here we specify target prices for certain products. These are arbitrarily set and you can modify based on your budget constraints.
+        # Here we specify target prices for certain products. These are arbitrarily set and you can modify based on
+        # your budget constraints.
         target_price = 0
         if '3060' in product_name:
-            target_price = 500
+            target_price = float(config.get('TARGET_PRICE_3060'))
         if '3070' in product_name:
-            target_price = 800
+            target_price = float(config.get('TARGET_PRICE_3070'))
         if '3080' in product_name:
-            target_price = 900
+            target_price = float(config.get('TARGET_PRICE_3080'))
 
         if price > target_price:
             found = False
