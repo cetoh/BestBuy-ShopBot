@@ -232,6 +232,8 @@ def perform_purchase(url):
     # pay
     pay_btn = driver.find_element_by_css_selector('button[class="btn btn-lg btn-block btn-primary"]')
     pay_btn.click()
+    config['AMT_BOUGHT'] = int(config.get('AMT_BOUGHT')) + 1
+    yaml.dump(config, open('config.yaml', 'w'))
     return True
 
 
